@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<project basedir="." default="build" name="dlx-debugger">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.7"/>
+    <property name="source" value="1.7"/>
+    <path id="dlx-debugger.classpath">
+        <pathelement location="bin"/>
+    </path>
+	
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="simulator/src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="debugger/src">
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+	
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+	
+    <target depends="init" name="build">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="simulator/src"/>
+            <src path="debugger/src"/>
+            <classpath refid="dlx-debugger.classpath"/>
+        </javac>
+    </target>
+	
+	<target depends="build" name="jar">
+		<jar basedir="bin" file="debugger.jar">
+			<manifest>
+		    	<attribute name="Main-Class" value="org.hawkinssoftware.dlx.debug.Debugger"/>
+			</manifest>
+		</jar>
+	</target>
+	
+</project>
