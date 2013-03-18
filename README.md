@@ -11,5 +11,5 @@ Licensing for this code is unrestricted. I wrote it for a class project with
 improvements that you would like merged into the repository, feel free to send
 a merge request.
 
-[1]http://www.ics.uci.edu/~franz/
+[1]: http://www.ics.uci.edu/~franz/
 
